@@ -13,15 +13,19 @@ const displayCategories = (categories) => {
         containerDiv.classList.add('navbar-nav');
         containerDiv.innerHTML = `
         <li class="nav-item pe-5">
-        <a class="nav-link active" aria-current="page" href="#">${categorie.category_name}</a>
+        <a onclick="loadCategoryDetail('${categorie.category_id}')" class="nav-link active" aria-current="page" href="#">${categorie.category_name}</a>
     </li>
         `;
-        console.log(categorie.category_name);
         categoriesContainer.appendChild(containerDiv);
-
-        console.log(categorie.category_name);
     });
-
-
+}
+const loadCategoryDetail = (categoryId) => {
+    const url = ` https://openapi.programming-hero.com/api/news/category/${categoryId}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayCategoryDetails(data))
+}
+const displayCategoryDetails = (category) => {
+    // console.log('display category', category);
 }
 loadCategories();
