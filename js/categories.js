@@ -38,9 +38,10 @@ const displayCategoryDetails = (categorys) => {
     else {
         noNewsFoundContainer.classList.add('d-none');
     }
+
     categorys.forEach(category => {
         const categoryDiv = document.createElement('div');
-        categoryDiv.classList.add('card');
+        categoryDiv.classList.add('card'); console.log(categorys.total_view);
         categoryDiv.innerHTML = `
          <div class="row g-0">
             <div class="col-md-2">
@@ -49,7 +50,7 @@ const displayCategoryDetails = (categorys) => {
             <div class="col-md-10">
                 <div class="card-body">
                     <h5 class="card-title">${category.title}</h5>
-                    <p class="card-text">${category.details.slice(0, 700)}</p>
+                    <p class="card-text">${category.details.slice(0, 800) ? category.details.slice(0, 800) + `...` : category.details.slice(0, 700)}</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     
@@ -89,6 +90,8 @@ const displayNewsDetails = (news) => {
     newsContainer.innerText = news.title;
     const newsDetails = document.getElementById('news-details');
     newsDetails.innerHTML = `
+    <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+    <br>
     <img style="width:40px; height:40px;" src="${news.author.img ? news.author.img : 'Not found Image'}" class="img-fluid rounded-start rounded-circle mt-1" alt="...">
     <p>Author: ${news.author.name ? news.author.name : 'Not found Author'}</p>
     <p>Published_date: ${news.author.published_date ? news.author.published_date : 'Not found published date'}</p>
