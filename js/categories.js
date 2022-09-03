@@ -3,6 +3,7 @@ const loadCategories = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategories(data.data.news_category))
+
 }
 
 const displayCategories = (categories) => {
@@ -17,16 +18,17 @@ const displayCategories = (categories) => {
         `;
         categoriesContainer.appendChild(containerUl);
     });
+
 }
 const loadCategoryDetail = (categoryId) => {
-
+    toggleSpinner(true);
     const url = ` https://openapi.programming-hero.com/api/news/category/${categoryId}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategoryDetails(data.data))
 }
+
 const displayCategoryDetails = (categorys) => {
-    console.log(categorys);
     const detailCategoryContainer = document.getElementById('detail-conatiner');
     detailCategoryContainer.innerHTML = ``;
 
@@ -41,7 +43,7 @@ const displayCategoryDetails = (categorys) => {
 
     categorys.forEach(category => {
         const categoryDiv = document.createElement('div');
-        categoryDiv.classList.add('card'); console.log(categorys.total_view);
+        categoryDiv.classList.add('card');
         categoryDiv.innerHTML = `
          <div class="row g-0">
             <div class="col-md-2">
@@ -77,7 +79,20 @@ const displayCategoryDetails = (categorys) => {
         `
         detailCategoryContainer.appendChild(categoryDiv);
     });
+    toggleSpinner(false);
 }
+
+// Spinner Section
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none');
+    }
+}
+
 const modalCategoryDetails = (news_id) => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
     fetch(url)
@@ -85,7 +100,6 @@ const modalCategoryDetails = (news_id) => {
         .then(data => displayNewsDetails(data.data[0]))
 }
 const displayNewsDetails = (news) => {
-    console.log(news);
     const newsContainer = document.getElementById('newsDetailsModalLabel');
     newsContainer.innerText = news.title;
     const newsDetails = document.getElementById('news-details');
