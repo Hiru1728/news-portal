@@ -3,7 +3,7 @@ const loadCategories = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategories(data.data.news_category))
-
+        .catch(error => console.log(error));
 }
 
 const displayCategories = (categories) => {
@@ -26,6 +26,7 @@ const loadCategoryDetail = (categoryId) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategoryDetails(data.data))
+        .catch(error => console.log(error));
 }
 
 const displayCategoryDetails = (categorys) => {
@@ -67,7 +68,7 @@ const displayCategoryDetails = (categorys) => {
                         </div>
                     </div>
                     <div>
-                        <h4>${category.total_view}</h4>
+                        <h4>View ${category.total_view}</h4>
                     </div>
                     <div>
                         <h4>${category.rating.badge}</h4>
@@ -101,7 +102,9 @@ const modalCategoryDetails = (news_id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNewsDetails(data.data[0]))
+        .catch(error => console.log(error));
 }
+
 const displayNewsDetails = (news) => {
     const newsContainer = document.getElementById('newsDetailsModalLabel');
     newsContainer.innerText = news.title;
