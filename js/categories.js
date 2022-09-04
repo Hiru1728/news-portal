@@ -30,9 +30,13 @@ const loadCategoryDetail = (categoryId) => {
 }
 
 const displayCategoryDetails = (categorys) => {
+    console.log(categorys);
     const detailCategoryContainer = document.getElementById('detail-conatiner');
     detailCategoryContainer.innerHTML = ``;
 
+    categorys.sort(function (a, b) {
+        return b.total_view - a.total_view;
+    });
     // Not Found News Section
     const noNewsFoundContainer = document.getElementById('no-found-news');
     const totalNewsContainer = document.getElementById('total-news');
@@ -63,12 +67,12 @@ const displayCategoryDetails = (categorys) => {
                     <div class="d-flex">
                     <img style="width:40px; height:40px;" src="${category.author.img}" class="img-fluid rounded-start rounded-circle ms-5 mt-1" alt="...">
                         <div>
-                            <p class="m-0 p-0">${category.author.name}</p>
-                            <p>${category.author.published_date}</p>
+                            <p class="m-0 p-0">${category.author.name ? category.author.name : 'Not Found Author'}</p>
+                            <p>${category.author.published_date ? category.author.published_date : 'Not Found Published Date'}</p>
                         </div>
                     </div>
                     <div>
-                        <h4>View ${category.total_view}</h4>
+                        <h4>View ${category.total_view ? category.total_view : '(No View)'}</h4>
                     </div>
                     <div>
                         <h4>${category.rating.badge}</h4>
@@ -120,5 +124,5 @@ const displayNewsDetails = (news) => {
     <p>Total_view: ${news.total_view ? news.total_view : 'Not found total view'}</p>
     `
 }
-// loadCategoryDetail('08');
+loadCategoryDetail('08');
 loadCategories();
