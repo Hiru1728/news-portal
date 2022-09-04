@@ -34,11 +34,14 @@ const displayCategoryDetails = (categorys) => {
 
     // Not Found News Section
     const noNewsFoundContainer = document.getElementById('no-found-news');
+    const totalNewsContainer = document.getElementById('total-news');
     if (categorys.length === 0) {
         noNewsFoundContainer.classList.remove('d-none');
+        totalNewsContainer.innerText = categorys.length + '  No News in this Category';
     }
     else {
         noNewsFoundContainer.classList.add('d-none');
+        totalNewsContainer.innerText = categorys.length + '  News in this Category';
     }
 
     categorys.forEach(category => {
