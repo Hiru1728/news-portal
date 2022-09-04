@@ -54,15 +54,16 @@ const displayCategoryDetails = (categorys) => {
     categorys.forEach(category => {
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('card');
+        categoryDiv.classList.add('mb-4');
         categoryDiv.innerHTML = `
          <div class="row g-0">
             <div class="col-md-2">
                 <img src="${category.thumbnail_url}" class="img-fluid rounded-start" alt="...">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 ">
                 <div class="card-body">
                     <h5 class="card-title">${category.title}</h5>
-                    <p class="card-text">${category.details.slice(0, 800) ? category.details.slice(0, 800) + `...` : category.details.slice(0, 700)}</p>
+                    <p class="card-text">${category.details.length > 700 ? category.details.slice(0, 700) + `...` : category.details.slice(0, 700)}</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     
