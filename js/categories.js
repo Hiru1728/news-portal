@@ -30,13 +30,15 @@ const loadCategoryDetail = (categoryId) => {
 }
 
 const displayCategoryDetails = (categorys) => {
-    console.log(categorys);
+
     const detailCategoryContainer = document.getElementById('detail-conatiner');
     detailCategoryContainer.innerHTML = ``;
 
+    // Sort Total View
     categorys.sort(function (a, b) {
         return b.total_view - a.total_view;
     });
+
     // Not Found News Section
     const noNewsFoundContainer = document.getElementById('no-found-news');
     const totalNewsContainer = document.getElementById('total-news');
